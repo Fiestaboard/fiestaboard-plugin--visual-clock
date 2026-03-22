@@ -11,86 +11,25 @@
   "settings_schema": {
     "type": "object",
     "properties": {
-      "timezone": {
-        "type": "string",
-        "title": "Timezone",
-        "description": "IANA timezone for the clock (e.g., America/New_York, Europe/London).",
-        "default": "America/Los_Angeles"
-      },
-      "time_format": {
-        "type": "string",
-        "title": "Time Format",
-        "description": "Display time in 12-hour or 24-hour format.",
-        "enum": [
-          "12h",
-          "24h"
-        ],
-        "default": "12h"
-      },
-      "color_pattern": {
-        "type": "string",
-        "title": "Color Pattern",
-        "description": "Color pattern for the clock display.",
-        "enum": [
-          "solid",
-          "pride",
-          "rainbow",
-          "sunset",
-          "ocean",
-          "retro",
-          "christmas",
-          "halloween"
-        ],
-        "default": "solid"
-      },
-      "digit_color": {
-        "type": "string",
-        "title": "Digit Color",
-        "description": "Color for solid pattern (ignored when using other patterns).",
-        "enum": [
-          "red",
-          "orange",
-          "yellow",
-          "green",
-          "blue",
-          "violet",
-          "white"
-        ],
-        "default": "white"
-      },
-      "background_color": {
-        "type": "string",
-        "title": "Background Color",
-        "description": "Background color for the clock display.",
-        "enum": [
-          "red",
-          "orange",
-          "yellow",
-          "green",
-          "blue",
-          "violet",
-          "white",
-          "black"
-        ],
-        "default": "black"
-      }
+      "timezone": {"type": "string", "title": "Timezone", "description": "IANA timezone for the clock (e.g., America/New_York, Europe/London).", "default": "America/Los_Angeles"},
+      "time_format": {"type": "string", "title": "Time Format", "description": "Display time in 12-hour or 24-hour format.", "enum": ["12h", "24h"], "default": "12h"},
+      "color_pattern": {"type": "string", "title": "Color Pattern", "description": "Color pattern for the clock display.", "enum": ["solid", "pride", "rainbow", "sunset", "ocean", "retro", "christmas", "halloween"], "default": "solid"},
+      "digit_color": {"type": "string", "title": "Digit Color", "description": "Color for solid pattern (ignored when using other patterns).", "enum": ["red", "orange", "yellow", "green", "blue", "violet", "white"], "default": "white"},
+      "background_color": {"type": "string", "title": "Background Color", "description": "Background color for the clock display.", "enum": ["red", "orange", "yellow", "green", "blue", "violet", "white", "black"], "default": "black"}
     }
   },
   "variables": {
-    "simple": [
-      "visual_clock",
-      "time",
-      "time_format",
-      "hour",
-      "minute"
-    ]
-  },
-  "max_lengths": {
-    "visual_clock": 132,
-    "time": 8,
-    "time_format": 3,
-    "hour": 2,
-    "minute": 2
+    "groups": {
+      "display": {"label": "Display"},
+      "time_data": {"label": "Time Data"}
+    },
+    "simple": {
+      "visual_clock": {"description": "Full pixel-art clock display for the board", "type": "string", "max_length": 132, "group": "display", "example": "(clock pattern)"},
+      "time": {"description": "Current time string", "type": "string", "max_length": 8, "group": "time_data", "example": "2:30 PM"},
+      "time_format": {"description": "Active time format (12h or 24h)", "type": "string", "max_length": 3, "group": "time_data", "example": "12h"},
+      "hour": {"description": "Current hour", "type": "number", "max_length": 2, "group": "time_data", "example": "14"},
+      "minute": {"description": "Current minute", "type": "number", "max_length": 2, "group": "time_data", "example": "30"}
+    }
   },
   "fiestaboard_version": ">=2.10.0"
 }

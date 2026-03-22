@@ -22,6 +22,16 @@ def manifest():
             }
         },
         "variables": {
-            "simple": ["visual_clock", "time", "time_format", "hour", "minute"]
+            "groups": {
+                "display": {"label": "Display"},
+                "time_data": {"label": "Time Data"}
+            },
+            "simple": {
+                "visual_clock": {"description": "Full pixel-art clock display for the board", "type": "string", "max_length": 132, "group": "display", "example": "(clock pattern)"},
+                "time": {"description": "Current time string", "type": "string", "max_length": 8, "group": "time_data", "example": "2:30 PM"},
+                "time_format": {"description": "Active time format (12h or 24h)", "type": "string", "max_length": 3, "group": "time_data", "example": "12h"},
+                "hour": {"description": "Current hour", "type": "number", "max_length": 2, "group": "time_data", "example": "14"},
+                "minute": {"description": "Current minute", "type": "number", "max_length": 2, "group": "time_data", "example": "30"}
+            }
         }
     }
