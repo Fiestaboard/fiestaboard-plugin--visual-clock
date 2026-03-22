@@ -2,7 +2,7 @@
 
 Displays a full-screen clock with large pixel-art style digits that span the entire 6x22 FiestaBoard display.
 
-![Visual Clock Display](./docs/visual-clock-display.png)
+![Visual Clock Display](./docs/board-display.png)
 
 **→ [Setup Guide](./docs/SETUP.md)** - Configuration and API key setup
 
