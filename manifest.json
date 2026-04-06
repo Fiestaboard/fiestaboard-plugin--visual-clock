@@ -1,7 +1,7 @@
 {
   "id": "visual_clock",
   "name": "Visual Clock",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Displays a full-screen clock with large pixel-art style digits.",
   "author": "FiestaBoard",
   "icon": "clock",
@@ -131,5 +131,43 @@
       "caption": "Displays a full-screen clock with large pixel-art style digits.",
       "primary": true
     }
-  ]
+  ],
+  "demo": {
+    "name": "Visual Clock Demo",
+    "device_type": "flagship",
+    "template": [
+      "{{visual_clock.visual_clock}}",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "line_metadata": [
+      {
+        "alignment": "left",
+        "wrap": true
+      },
+      {
+        "alignment": "left",
+        "wrap": false
+      },
+      {
+        "alignment": "left",
+        "wrap": false
+      },
+      {
+        "alignment": "left",
+        "wrap": false
+      },
+      {
+        "alignment": "left",
+        "wrap": false
+      },
+      {
+        "alignment": "left",
+        "wrap": false
+      }
+    ]
+  }
 }
