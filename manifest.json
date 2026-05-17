@@ -1,7 +1,7 @@
 {
   "id": "visual_clock",
   "name": "Visual Clock",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Displays a full-screen clock with large pixel-art style digits.",
   "author": "FiestaBoard",
   "icon": "clock",
