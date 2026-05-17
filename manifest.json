@@ -1,7 +1,7 @@
 {
   "id": "visual_clock",
   "name": "Visual Clock",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Displays a full-screen clock with large pixel-art style digits.",
   "author": "FiestaBoard",
   "icon": "clock",
@@ -133,41 +133,64 @@
     }
   ],
   "demo": {
-    "name": "Visual Clock Demo",
-    "device_type": "flagship",
-    "template": [
-      "{{visual_clock.visual_clock}}",
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
-    "line_metadata": [
-      {
-        "alignment": "left",
-        "wrap": true
-      },
-      {
-        "alignment": "left",
-        "wrap": false
-      },
-      {
-        "alignment": "left",
-        "wrap": false
-      },
-      {
-        "alignment": "left",
-        "wrap": false
-      },
-      {
-        "alignment": "left",
-        "wrap": false
-      },
-      {
-        "alignment": "left",
-        "wrap": false
-      }
-    ]
+    "flagship": {
+      "name": "Visual Clock Demo",
+      "template": [
+        "{{visual_clock.visual_clock}}",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "line_metadata": [
+        {
+          "alignment": "left",
+          "wrap": true
+        },
+        {
+          "alignment": "left",
+          "wrap": false
+        },
+        {
+          "alignment": "left",
+          "wrap": false
+        },
+        {
+          "alignment": "left",
+          "wrap": false
+        },
+        {
+          "alignment": "left",
+          "wrap": false
+        },
+        {
+          "alignment": "left",
+          "wrap": false
+        }
+      ]
+    },
+    "note": {
+      "name": "Visual Clock (Note)",
+      "template": [
+        "{{visual_clock.visual_clock}}",
+        "",
+        ""
+      ],
+      "line_metadata": [
+        {
+          "alignment": "left",
+          "wrap": true
+        },
+        {
+          "alignment": "left",
+          "wrap": false
+        },
+        {
+          "alignment": "left",
+          "wrap": false
+        }
+      ]
+    }
   }
 }
