@@ -66,3 +66,58 @@ def test_demo_variables_are_defined(device_type: str, template: list[str]) -> No
     assert not invalid, (
         f"Demo '{device_type}' references undefined variables: {invalid}"
     )
+
+
+def _configured_plugin(manifest: dict):
+    from plugins.visual_clock import VisualClockPlugin
+
+    plugin = VisualClockPlugin(manifest)
+    plugin.config = {
+        "timezone": "UTC",
+        "time_format": "24h",
+        "color_pattern": "solid",
+        "digit_color": "white",
+        "background_color": "black",
+    }
+    return plugin
+
+
+@pytest.mark.parametrize("device_type,template", _demo_cases())
+def test_demo_renders_the_clock_on_its_device(device_type: str, template: list[str]) -> None:
+    """Each demo page must put the whole clock on the board it declares.
+
+    The clock variable is whole-board art. On a ``wrap: true`` line the engine
+    treats each board row as one word and slices it at the board width, so a
+    Note demo showed three fragments of the top of the glyphs instead of a
+    clock. Rendering the real demo through the real engine is what catches
+    that; asserting the board equals the plugin's own rows is what makes it
+    specific.
+    """
+    from src.devices import BoardContext, resolve_dimensions
+    from src.templates.engine import TemplateEngine
+
+    manifest = _load_manifest()
+    dims = resolve_dimensions(device_type)
+    plugin = _configured_plugin(manifest)
+    data = plugin.get_data(BoardContext.from_device_type(device_type)).data
+
+    rendered = TemplateEngine().render_lines(
+        template,
+        context={manifest["id"]: data},
+        line_metadata=manifest["demo"][device_type]["line_metadata"],
+        device_type=device_type,
+    ).split("\n")
+
+    assert len(rendered) == dims.rows
+    assert [line.rstrip() for line in rendered] == data["visual_clock"].split("\n")
+
+
+def test_teaser_and_previews_are_valid() -> None:
+    """The manifest's board previews must satisfy core's own validation."""
+    from src.plugins.previews import validate_previews, validate_teaser
+
+    manifest = _load_manifest()
+    assert validate_teaser(manifest["teaser"]) == []
+    assert validate_previews(manifest["previews"]) == []
+    shapes = {preview.get("device_type") for preview in manifest["previews"]}
+    assert shapes == {"flagship", "note", "note_array"}

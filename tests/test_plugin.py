@@ -250,14 +250,14 @@ class TestGenerateClockDisplay:
 
 
 class TestDrawDigit:
-    """Tests for _draw_digit method."""
+    """Tests for drawing a digit glyph onto a board array."""
     
     def test_draw_digit_zero(self, manifest):
         """Test drawing digit 0."""
         plugin = VisualClockPlugin(manifest)
         board = [[BoardChars.BLACK] * 22 for _ in range(6)]
         
-        plugin._draw_digit(board, 0, 0, 0, BoardChars.WHITE, BoardChars.BLACK)
+        plugin._blit(board, DIGIT_PATTERNS[0], 0, 0, 1, [BoardChars.WHITE] * 6, BoardChars.BLACK)
         
         # Check corners of digit 0 (should be filled)
         assert board[0][0] == BoardChars.WHITE
@@ -274,19 +274,19 @@ class TestDrawDigit:
         
         for digit in range(10):
             board = [[BoardChars.BLACK] * 22 for _ in range(6)]
-            plugin._draw_digit(board, digit, 0, 0, BoardChars.WHITE, BoardChars.BLACK)
+            plugin._blit(board, DIGIT_PATTERNS[digit], 0, 0, 1, [BoardChars.WHITE] * 6, BoardChars.BLACK)
             # Just verify no exception is raised
 
 
 class TestDrawColon:
-    """Tests for _draw_colon method."""
+    """Tests for drawing the colon glyph onto a board array."""
     
     def test_draw_colon(self, manifest):
         """Test drawing colon pattern."""
         plugin = VisualClockPlugin(manifest)
         board = [[BoardChars.BLACK] * 22 for _ in range(6)]
         
-        plugin._draw_colon(board, 0, 0, BoardChars.WHITE, BoardChars.BLACK)
+        plugin._blit(board, COLON_PATTERN, 0, 0, 1, [BoardChars.WHITE] * 6, BoardChars.BLACK)
         
         # Check colon dots (rows 1 and 4 should have dots for 6-row pattern)
         assert board[1][0] == BoardChars.WHITE

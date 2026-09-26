@@ -1,7 +1,7 @@
 {
   "id": "visual_clock",
   "name": "Visual Clock",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "Displays a full-screen clock with large pixel-art style digits.",
   "live_data": true,
   "author": "FiestaBoard",
@@ -88,11 +88,11 @@
     },
     "simple": {
       "visual_clock": {
-        "description": "Full pixel-art clock display for the board",
+        "description": "Whole-board pixel-art clock, one line per board row, sized and centred for the board it renders on",
         "type": "string",
-        "max_length": 132,
+        "max_length": 2903,
         "group": "display",
-        "example": "(clock pattern)"
+        "example": "(clock art, one row per board row)"
       },
       "time": {
         "description": "Current time string",
@@ -138,20 +138,34 @@
     {
       "device_type": "flagship",
       "rows": [
-        "  {63}  {67}{67}{67}{67}  {66}{66}{66}{66}  {65}{65}{65}{65}",
-        "  {63}  {67}  {67}     {66}  {65}  {65}",
-        "  {63}  {67}  {67}     {66}  {65}  {65}",
-        "  {63}  {67}  {67}  {66}{66}{66}{66}  {65}{65}{65}{65}",
-        "  {63}  {67}  {67}     {66}  {65}  {65}",
-        "  {63}  {67}{67}{67}{67}  {66}{66}{66}{66}  {65}{65}{65}{65}"
+        " {69}{69}  {69}{69}{69}{69}    {69}{69}{69}{69} {69}  {69}",
+        "{69}{69}{69}    {69}{69} {69}{69}   {69}{69} {69}  {69}",
+        " {69}{69}    {69}{69}    {69}{69}{69}{69} {69}  {69}",
+        " {69}{69}  {69}{69}{69}{69}      {69}{69} {69}{69}{69}{69}",
+        " {69}{69}  {69}{69}   {69}{69}   {69}{69}   {69}{69}",
+        "{69}{69}{69}{69} {69}{69}{69}{69}    {69}{69}{69}{69}   {69}{69}"
       ]
     },
     {
       "device_type": "note",
       "rows": [
-        "{67}{67}{67}{67}{67}{67}{67}{67}{67}{67}{67}{67}{67}{67}{67}",
-        "     12:34",
-        "{67}{67}{67}{67}{67}{67}{67}{67}{67}{67}{67}{67}{67}{67}{67}"
+        "",
+        " 1  2  :  3  4",
+        ""
+      ]
+    },
+    {
+      "label": "Note Array (2x2)",
+      "device_type": "note_array",
+      "notes_wide": 2,
+      "notes_tall": 2,
+      "rows": [
+        "     {69}{69}  {69}{69}{69}{69}    {69}{69}{69}{69} {69}  {69}",
+        "    {69}{69}{69}    {69}{69} {69}{69}   {69}{69} {69}  {69}",
+        "     {69}{69}    {69}{69}    {69}{69}{69}{69} {69}  {69}",
+        "     {69}{69}  {69}{69}{69}{69}      {69}{69} {69}{69}{69}{69}",
+        "     {69}{69}  {69}{69}   {69}{69}   {69}{69}   {69}{69}",
+        "    {69}{69}{69}{69} {69}{69}{69}{69}    {69}{69}{69}{69}   {69}{69}"
       ]
     }
   ],
@@ -169,7 +183,7 @@
       "line_metadata": [
         {
           "alignment": "left",
-          "wrap": true
+          "wrap": false
         },
         {
           "alignment": "left",
@@ -203,7 +217,7 @@
       "line_metadata": [
         {
           "alignment": "left",
-          "wrap": true
+          "wrap": false
         },
         {
           "alignment": "left",
@@ -215,5 +229,12 @@
         }
       ]
     }
+  },
+  "max_lengths": {
+    "visual_clock": 2903,
+    "time": 8,
+    "time_format": 3,
+    "hour": 2,
+    "minute": 2
   }
 }
