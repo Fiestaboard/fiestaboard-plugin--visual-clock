@@ -1,6 +1,6 @@
 # Visual Clock Plugin
 
-Displays a full-screen clock with large pixel-art style digits that span the entire 6x22 FiestaBoard display.
+Displays a full-screen clock with large pixel-art style digits, sized to whatever board it is rendering on: a Flagship (22x6), a Note (15x3), or any note array up to 120x24 (which is what a FiestaPanel is).
 
 ![Visual Clock Display](./docs/board-display.png)
 
@@ -50,16 +50,38 @@ Displays a full-screen clock with large pixel-art style digits that span the ent
 
 ## Display Layout
 
-The clock uses pixel-art style digits that fill the entire board:
+The clock is a glyph unit that is integer-scaled and centred on the board it
+is drawn on. Nothing is measured in fixed tiles.
 
 ```
-Rows 0-5: [H1][gap][H2][gap][:][gap][M1][gap][M2]
+inline:  [H1][gap][H2][gap][:][gap][M1][gap][M2]
+stacked: [H1][gap][H2]
+         [M1][gap][M2]
 ```
 
-- Each digit is 4 columns wide × 6 rows tall (full board height)
-- Colon separator is 2 columns wide × 6 rows tall
-- 1-column gaps on both sides of colon for clear separation
-- Total layout: 4 + 1 + 4 + 1 + 2 + 1 + 4 + 1 + 4 = 22 columns
+- **Big digits** are 4 columns × 6 rows. Their inline unit is exactly 22 × 6,
+  so a Flagship is scale 1 and a full 8×8 note array (120 × 24) is scale 4.
+- **Compact digits** are 3 columns × 5 rows, for boards too narrow for the
+  inline big unit. Their stacked unit is 7 × 11, which is what a tall-narrow
+  array (15 × 12 — narrower than a Flagship and twice as tall) renders.
+- **Three-row boards** (a Note, or a wide-short array like 120 × 3) cannot
+  hold a legible bitmap digit — three rows collapse 2/3/5 and 0/8 into each
+  other — so they fall back to the board's own letterforms, letter-spaced to
+  the width available.
+
+The layout chosen is the one with the tallest rendered digits, then the one
+that covers the most board. The hours slot keeps its width when the leading
+zero is blank, so the clock does not shuffle sideways as the hour rolls over.
+
+| Board | Layout |
+|---|---|
+| Flagship 22×6 | big inline, scale 1 |
+| Note 15×3 | letterforms |
+| Panel 30×12 (65″) | big inline, scale 1 |
+| Panel 45×18 (85″) | big inline, scale 2 |
+| Tall-narrow 15×12 | compact stacked, scale 1 |
+| Wide-short 120×3 | letterforms |
+| Max array 120×24 | big inline, scale 4 |
 
 ## Usage
 
